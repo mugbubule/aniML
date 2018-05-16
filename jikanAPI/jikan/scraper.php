@@ -1,8 +1,12 @@
 <?php
-require_once dirname(__DIR__) . "/vendor/autoload.php";
 
-if ($argv.count() < 3) {
-  echo "this.php [first_id] [range]";
+error_reporting(E_ALL);
+
+require_once "vendor/autoload.php";
+
+if (count($argv) < 3) {
+  echo "php this.php [first_id] [range]\n";
+  exit(1);
 }
 
 $anime_fd = fopen("anime.csv", "a");
@@ -17,7 +21,7 @@ $id = (int)$argv[1];
 $first_id = $id;
 $range = $argv[1] + $argv[2] * 2;
 
-while ($id < $first_id + $range) {
+while ($id <= $first_id + $range) {
   echo "Trying to get " . $id;
   try {
       scrapAnime($id, $anime_fd, $voice_actor_fd, $producer_fd, $licensor_fd, $studio_fd, $staff_fd);
@@ -27,6 +31,7 @@ while ($id < $first_id + $range) {
       close_everything($anime_fd, $voice_actor_fd, $producer_fd, $licensor_fd, $studio_fd, $staff_fd);
       exit(0);
     }
+    echo " done! Waiting for next request\n";
   sleep(5);
   $id += 2;
 }
@@ -48,65 +53,64 @@ function scrapAnime($id, $anime_fd, $voice_actor_fd, $producer_fd, $licensor_fd,
   $anime->Anime($id, [STATS, CHARACTERS_STAFF]);
   $line = "";
 
-  $line .= $anime["mal_id"] . ", ";
-  $line .= $anime["title"] . ",";
-  $line .= $anime["type"] . ",";
-  $line .= $anime["source"] . ",";
-  $line .= $anime["episodes"] . ",";
-  $line .= $anime["aired"]["from"] . ","; //the older the less important
-  $line .= $anime["duration"] . ",";
-  $line .= $anime["rating"] . ",";
-  $line .= $anime["score"] . ",";
-  $line .= $anime["rank"] . ",";
-  $line .= $anime["scored_by"] . ",";
-  $line .= $anime["popularity"] . ",";
-  $line .= $anime["members"] . ",";
-  $line .= $anime["favorites"] . ",";
+  var_dump($anime);
+  $line .= $anime->response["mal_id"] . ", ";
+  $line .= $anime->response["title"] . ",";
+  $line .= $anime->response["type"] . ",";
+  $line .= $anime->response["source"] . ",";
+  $line .= $anime->response["episodes"] . ",";
+  $line .= $anime->response["aired"]["from"] . ","; //the older the less important
+  $line .= $anime->response["duration"] . ",";
+  $line .= $anime->response["rating"] . ",";
+  $line .= $anime->response["score"] . ",";
+  $line .= $anime->response["rank"] . ",";
+  $line .= $anime->response["scored_by"] . ",";
+  $line .= $anime->response["popularity"] . ",";
+  $line .= $anime->response["members"] . ",";
+  $line .= $anime->response["favorites"] . ",";
 
   $related_work = 0;
-  foreach ($anime["related"] as $related) {
+  foreach ($anime->response["related"] as $related) {
     $related_work++;
-    foreach ($related as $work) {
-      $related_work++;
-    }
+    $related_work += count($related);
   }
   $line .= $related_work . ",";
 
-  foreach ($anime["producer"] as $producer) {
-    fwrite($producer_fd, $producer["name"] . ", " . $anime["mal_id"] . "\n");
+  foreach ($anime->response["producer"] as $producer) {
+    fwrite($producer_fd, $producer["name"] . ", " . $anime->response["mal_id"] . "\n");
   }
-  foreach ($anime["licensor"] as $licensor) {
-    fwrite($licensor_fd, $licensor["name"] . ", " . $anime["mal_id"] . "\n");
+  foreach ($anime->response["licensor"] as $licensor) {
+    fwrite($licensor_fd, $licensor["name"] . ", " . $anime->response["mal_id"] . "\n");
   }
-  foreach ($anime["studio"] as $studio) {
-    fwrite($studio_fd, $studio["name"] . ", " . $anime["mal_id"] . "\n");
+  foreach ($anime->response["studio"] as $studio) {
+    fwrite($studio_fd, $studio["name"] . ", " . $anime->response["mal_id"] . "\n");
   }
 
   $line .= "\"";
-  foreach ($anime["genre"] as $genre) {
+  foreach ($anime->response["genre"] as $genre) {
     $line .= $genre["name"] . ",";
   }
   $line .= "\"";
 
-  $line .= $anime["genre"] . ",";
-  $line .= $anime["watching"] . ",";
-  $line .= $anime["completed"] . ",";
-  $line .= $anime["on_hold"] . ",";
-  $line .= $anime["dropped"] . ",";
-  $line .= $anime["plan_to_watch"] . ",";
-  $line .= $anime["total"] . ","; //most important actually
-  $line .= $anime["stats"] . ",";
+  $line .= $anime->response["genre"] . ",";
+  $line .= $anime->response["watching"] . ",";
+  $line .= $anime->response["completed"] . ",";
+  $line .= $anime->response["on_hold"] . ",";
+  $line .= $anime->response["dropped"] . ",";
+  $line .= $anime->response["plan_to_watch"] . ",";
+  $line .= $anime->response["total"] . ","; //most important actually
+  $line .= $anime->response["stats"] . ","; //undefined index wat
 
-  foreach ($anime["characters"] as $character) {
+  foreach ($anime->response["characters"] as $character) { //undefined etc
     foreach($character["voice_actor"] as $voice_actor) {
       if ($voice_actor["language"] == "Japanese") {
-        fwrite($voice_actor_fd, $voice_actor["mal_id"] . ", " . $voice_actor["name"] . ", " . $anime["mal_id"] . "\n")
+        fwrite($voice_actor_fd, $voice_actor["mal_id"] . ", " . $voice_actor["name"] . ", " . $anime->response["mal_id"] . "\n");
       }
     }
   }
 
-  foreach ($anime["staff"] as $staff) {
-    fwrite($staff_fd, $staff["mal_id"] . ", " . $staff["name"] . ", " . $staff["role"] . ", " . $anime["mal_id"] . "\n");
+  foreach ($anime->response["staff"] as $staff) {
+    fwrite($staff_fd, $staff["mal_id"] . ", " . $staff["name"] . ", " . $staff["role"] . ", " . $anime->response["mal_id"] . "\n");
   }
     fwrite($anime_fd, $line . "\n");
 }
