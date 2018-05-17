@@ -25,16 +25,21 @@ while ($id <= $first_id + $range) {
   echo "Trying to get " . $id;
   try {
       scrapAnime($id, $anime_fd, $voice_actor_fd, $producer_fd, $licensor_fd, $studio_fd, $staff_fd);
+      $id += 2;
+      echo " done! Waiting for next request";
     } catch (Exception $e) {
-      echo 'Caught exception: ',  $e->getMessage(); // "File does not exist" (the anime with this ID doesn't exist on MAL)
+      echo ' Caught exception: ', $e->getMessage;
+      echo ' ';
       echo $id;
-      close_everything($anime_fd, $voice_actor_fd, $producer_fd, $licensor_fd, $studio_fd, $staff_fd);
-      exit(0);
+      if ($e->getMessage != "File does not exist") {
+        close_everything($anime_fd, $voice_actor_fd, $producer_fd, $licensor_fd, $studio_fd, $staff_fd);
+        exit(0);
+      }
     }
-    echo " done! Waiting for next request\n";
+    echo "\n";
   sleep(5);
-  $id += 2;
 }
+echo "I'm done\n"
 
 fclose($staff_fd);
 
@@ -53,28 +58,27 @@ function scrapAnime($id, $anime_fd, $voice_actor_fd, $producer_fd, $licensor_fd,
   $anime->Anime($id, [STATS, CHARACTERS_STAFF]);
   $line = "";
 
-  var_dump($anime);
   $line .= $anime->response["mal_id"] . ", ";
-  $line .= $anime->response["title"] . ",";
-  $line .= $anime->response["type"] . ",";
-  $line .= $anime->response["source"] . ",";
-  $line .= $anime->response["episodes"] . ",";
-  $line .= $anime->response["aired"]["from"] . ","; //the older the less important
-  $line .= $anime->response["duration"] . ",";
-  $line .= $anime->response["rating"] . ",";
-  $line .= $anime->response["score"] . ",";
-  $line .= $anime->response["rank"] . ",";
-  $line .= $anime->response["scored_by"] . ",";
-  $line .= $anime->response["popularity"] . ",";
-  $line .= $anime->response["members"] . ",";
-  $line .= $anime->response["favorites"] . ",";
+  $line .= $anime->response["title"] . ", ";
+  $line .= $anime->response["type"] . ", ";
+  $line .= $anime->response["source"] . ", ";
+  $line .= $anime->response["episodes"] . ", ";
+  $line .= $anime->response["aired"]["from"] . ", "; //the older the less important
+  $line .= $anime->response["duration"] . ", ";
+  $line .= $anime->response["rating"] . ", ";
+  $line .= $anime->response["score"] . ", ";
+  $line .= $anime->response["rank"] . ", ";
+  $line .= $anime->response["scored_by"] . ", ";
+  $line .= $anime->response["popularity"] . ", ";
+  $line .= $anime->response["members"] . ", ";
+  $line .= $anime->response["favorites"] . ", ";
 
   $related_work = 0;
   foreach ($anime->response["related"] as $related) {
     $related_work++;
     $related_work += count($related);
   }
-  $line .= $related_work . ",";
+  $line .= $related_work . ", ";
 
   foreach ($anime->response["producer"] as $producer) {
     fwrite($producer_fd, $producer["name"] . ", " . $anime->response["mal_id"] . "\n");
@@ -88,20 +92,19 @@ function scrapAnime($id, $anime_fd, $voice_actor_fd, $producer_fd, $licensor_fd,
 
   $line .= "\"";
   foreach ($anime->response["genre"] as $genre) {
-    $line .= $genre["name"] . ",";
+    $line .= $genre["name"] . ", ";
   }
-  $line .= "\"";
+  $line .= "\", ";
 
-  $line .= $anime->response["genre"] . ",";
-  $line .= $anime->response["watching"] . ",";
-  $line .= $anime->response["completed"] . ",";
-  $line .= $anime->response["on_hold"] . ",";
-  $line .= $anime->response["dropped"] . ",";
-  $line .= $anime->response["plan_to_watch"] . ",";
-  $line .= $anime->response["total"] . ","; //most important actually
-  $line .= $anime->response["stats"] . ","; //undefined index wat
+  $line .= $anime->response["watching"] . ", ";
+  $line .= $anime->response["completed"] . ", ";
+  $line .= $anime->response["on_hold"] . ", ";
+  $line .= $anime->response["dropped"] . ", ";
+  $line .= $anime->response["plan_to_watch"] . ", ";
+  $line .= $anime->response["total"] . ", "; //most important actually
+  //$line .= $anime->response["stats"] . ", "; //if usefull (basically how people voted from 0 to 10)
 
-  foreach ($anime->response["characters"] as $character) { //undefined etc
+  foreach ($anime->response["character"] as $character) { //undefined etc
     foreach($character["voice_actor"] as $voice_actor) {
       if ($voice_actor["language"] == "Japanese") {
         fwrite($voice_actor_fd, $voice_actor["mal_id"] . ", " . $voice_actor["name"] . ", " . $anime->response["mal_id"] . "\n");
@@ -110,9 +113,8 @@ function scrapAnime($id, $anime_fd, $voice_actor_fd, $producer_fd, $licensor_fd,
   }
 
   foreach ($anime->response["staff"] as $staff) {
-    fwrite($staff_fd, $staff["mal_id"] . ", " . $staff["name"] . ", " . $staff["role"] . ", " . $anime->response["mal_id"] . "\n");
+    fwrite($staff_fd, $staff["mal_id"] . ", " . $staff["name"] . ", \"" . $staff["role"] . "\", " . $anime->response["mal_id"] . "\n");
   }
     fwrite($anime_fd, $line . "\n");
 }
 ?>
-
