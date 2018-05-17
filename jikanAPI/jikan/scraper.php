@@ -101,7 +101,7 @@ function scrapAnime($id, $anime_fd, $voice_actor_fd, $producer_fd, $licensor_fd,
   $line .= $anime->response["on_hold"] . ", ";
   $line .= $anime->response["dropped"] . ", ";
   $line .= $anime->response["plan_to_watch"] . ", ";
-  $line .= $anime->response["total"] . ", "; //most important actually
+  $line .= $anime->response["total"]; //most important actually
   //$line .= $anime->response["stats"] . ", "; //if usefull (basically how people voted from 0 to 10)
 
   foreach ($anime->response["character"] as $character) { //undefined etc
