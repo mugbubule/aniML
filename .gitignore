@@ -1,0 +1,5 @@
+mlproject/venv/lib/
+
+mlproject/.idea
+
+*.so
