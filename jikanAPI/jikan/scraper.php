@@ -28,10 +28,10 @@ while ($id <= $first_id + $range) {
       $id += 2;
       echo " done! Waiting for next request";
     } catch (Exception $e) {
-      echo ' Caught exception: ', $e->getMessage;
+      echo ' Caught exception: ', $e->getMessage();
       echo ' ';
       echo $id;
-      if ($e->getMessage != "File does not exist") {
+      if ($e->getMessage() != "File does not exist") {
         close_everything($anime_fd, $voice_actor_fd, $producer_fd, $licensor_fd, $studio_fd, $staff_fd);
         exit(0);
       }
@@ -39,7 +39,7 @@ while ($id <= $first_id + $range) {
     echo "\n";
   sleep(5);
 }
-echo "I'm done\n"
+echo "I'm done\n";
 
 fclose($staff_fd);
 
