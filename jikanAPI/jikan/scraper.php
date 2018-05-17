@@ -25,9 +25,9 @@ while ($id <= $first_id + $range) {
   echo "Trying to get " . $id;
   try {
       scrapAnime($id, $anime_fd, $voice_actor_fd, $producer_fd, $licensor_fd, $studio_fd, $staff_fd);
-      $id += 2;
       echo " done! Waiting for next request";
     } catch (Exception $e) {
+      $range += 2;
       echo ' Caught exception: ', $e->getMessage();
       echo ' ';
       echo $id;
@@ -36,8 +36,9 @@ while ($id <= $first_id + $range) {
         exit(0);
       }
     }
-    echo "\n";
+  echo "\n";
   sleep(5);
+  $id += 2;
 }
 echo "I'm done\n";
 
