@@ -46,3 +46,31 @@ class Anime(Enum):
     DROPPED = 19
     PLAN_TO_WATCH = 20
     TOTAL = 21
+
+LI_NAME = 0
+ANIME_ID = 1
+
+class Licensor(Enum):
+    NAME = 0
+    ANIME_ID = 1
+
+ID = 0
+NAME = 1
+SURNAME = 2
+ANIME_ID = 3
+
+class VA(Enum):
+    ID = 0
+    NAME = 1
+    SURNAME = 2
+    ANIME_ID = 3
+
+JOB = 3
+ANIME_ID = 4
+
+class Staff(Enum):
+    ID = 0
+    NAME = 1
+    SURNAME = 2
+    JOB = 3
+    ANIME_ID = 4
