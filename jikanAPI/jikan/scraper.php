@@ -18,10 +18,9 @@ $staff_fd = fopen("staff.csv", "a");
 echo "witness as I painfully try to scrap MAL\n";
 
 $id = (int)$argv[1];
-$first_id = $id;
 $range = $argv[1] + $argv[2] * 2;
 
-while ($id <= $first_id + $range) {
+while ($id <= $range) {
   echo "Trying to get " . $id;
   try {
       scrapAnime($id, $anime_fd, $voice_actor_fd, $producer_fd, $licensor_fd, $studio_fd, $staff_fd);
