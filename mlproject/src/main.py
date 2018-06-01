@@ -1,7 +1,7 @@
 import numpy
 from numpy import arange
 import csv
-from pandas import read_csv, set_option
+import pandas as pd
 
 
 filename = '../anime.csv'
@@ -12,14 +12,22 @@ names = ["id", "title", "type",
          "members", "favorites", "related",
          "genre", "watching", "completed",
          "on_hold", "dropped", "plan_to_watch", "total"]
-dataset = read_csv(filename, index_col=False, quotechar = '"', delimiter = ',', quoting = csv.QUOTE_ALL, skipinitialspace = True, names=names)
-print("The dataset' size :")
-print(dataset.shape)
+
+dataset = pd.read_csv(filename, index_col=False, quotechar='"', delimiter=',', quoting=csv.QUOTE_ALL, skipinitialspace=True, names=names)
+dataset["score"] = pd.to_numeric(dataset['score'], errors='coerce').fillna(0)
+dataset["completed"] = pd.to_numeric(dataset['completed'], errors='coerce').fillna(0)
+dataset["watching"] = pd.to_numeric(dataset['watching'], errors='coerce').fillna(0)
+dataset["rank"] = pd.to_numeric(dataset['rank'], errors='coerce').fillna(0)
+dataset["episodes"] = pd.to_numeric(dataset['episodes'], errors='coerce').fillna(0)
+
 types = dataset.dtypes
-description = dataset.describe()
-print(description)
+peek = dataset.head(1)
 correlations = dataset.corr(method='pearson')
+
+print("The dataset' size :"), print(dataset.shape)
+print(types)
 print(correlations)
+
 # 2. Summarize Data
 # a) Descriptive statistics
 # b) Data visualizations
