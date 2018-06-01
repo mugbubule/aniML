@@ -1,10 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="27e9578b-bddb-4d7d-8709-0a33280dbcf4" name="Default" comment="Load anime.csv into pandas and we have statistics on it">
-      <change afterPath="$PROJECT_DIR$/src/data.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/mlproject.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/mlproject.iml" afterDir="false" />
+    <list default="true" id="27e9578b-bddb-4d7d-8709-0a33280dbcf4" name="Default" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/data.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/data.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/main.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -15,15 +14,15 @@
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
   <component name="CoverageDataManager">
-    <SUITE FILE_PATH="coverage/mlproject$main.coverage" NAME="main Coverage Results" MODIFIED="1527841493233" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/src" />
+    <SUITE FILE_PATH="coverage/mlproject$main.coverage" NAME="main Coverage Results" MODIFIED="1527842126018" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/src" />
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
       <file leaf-file-name="main.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="105">
-              <caret line="7" column="5" selection-start-line="7" selection-start-column="5" selection-end-line="7" selection-end-column="5" />
+            <state relative-caret-position="120">
+              <caret line="8" column="5" selection-start-line="8" selection-start-column="5" selection-end-line="8" selection-end-column="5" />
             </state>
           </provider>
         </entry>
@@ -40,8 +39,8 @@
       <file leaf-file-name="data.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/data.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="45">
-              <caret line="45" selection-start-line="45" selection-end-line="45" />
+            <state relative-caret-position="234">
+              <caret line="34" column="70" lean-forward="true" selection-start-line="34" selection-start-column="70" selection-end-line="34" selection-end-column="70" />
               <folding>
                 <element signature="e#0#10#0" expanded="true" />
               </folding>
@@ -237,7 +236,14 @@
       <option name="project" value="LOCAL" />
       <updated>1527837396302</updated>
     </task>
-    <option name="localTasksCounter" value="6" />
+    <task id="LOCAL-00006" summary="Load anime.csv into pandas and we have statistics on it">
+      <created>1527841704651</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1527841704651</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="TodoView">
@@ -258,13 +264,13 @@
       <window_info anchor="bottom" id="Database Changes" order="7" show_stripe_button="false" />
       <window_info anchor="bottom" id="Version Control" order="7" weight="0.7636816" />
       <window_info anchor="bottom" id="Python Console" order="7" weight="0.32975295" />
-      <window_info anchor="bottom" id="Run" order="2" sideWeight="0.64834577" visible="true" weight="0.32867885" />
+      <window_info active="true" anchor="bottom" id="Run" order="2" sideWeight="0.64834577" visible="true" weight="0.32867885" />
       <window_info anchor="bottom" id="Terminal" order="7" sideWeight="0.4985207" weight="0.32867885" />
       <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.19263607" />
       <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
       <window_info anchor="right" id="Database" order="3" />
       <window_info anchor="bottom" id="Find" order="1" />
-      <window_info active="true" anchor="right" id="SciView" order="3" visible="true" weight="0.2801494" />
+      <window_info anchor="right" id="SciView" order="3" visible="true" weight="0.2801494" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
@@ -423,8 +429,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="105">
-          <caret line="7" column="5" selection-start-line="7" selection-start-column="5" selection-end-line="7" selection-end-column="5" />
+        <state relative-caret-position="120">
+          <caret line="8" column="5" selection-start-line="8" selection-start-column="5" selection-end-line="8" selection-end-column="5" />
         </state>
       </provider>
     </entry>
@@ -437,8 +443,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/data.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="45">
-          <caret line="45" selection-start-line="45" selection-end-line="45" />
+        <state relative-caret-position="234">
+          <caret line="34" column="70" lean-forward="true" selection-start-line="34" selection-start-column="70" selection-end-line="34" selection-end-column="70" />
           <folding>
             <element signature="e#0#10#0" expanded="true" />
           </folding>

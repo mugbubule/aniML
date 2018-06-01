@@ -4,9 +4,9 @@ from data import Data
 def main():
     filename = '../../jikanAPI/jikan/anime.csv'
     data = Data(filename)
-    data.visualize()
+    #data.visualize()
     # data.plot()
-    data.plot_correlations()
+    #data.plot_correlations()
     #data.compute()
 
 if __name__ == "__main__":
