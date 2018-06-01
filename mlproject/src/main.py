@@ -1,17 +1,25 @@
 import numpy
 from numpy import arange
-from pandas import read_csv
+import csv
+from pandas import read_csv, set_option
 
 
 filename = '../anime.csv'
-names = ["id", "title", "type", "source", "episodes", "aired", "duration", "rating", "score",
-         "rank", "scored_by", "popularity", "members", "favorites", "related", "genre",
-         "watching", "completed", "onhold", "dropped", "plan_to_watch", "total"]
-dataset = read_csv(filename, quoting=1, names=names)
-print("The dataset' size :"),
+names = ["id", "title", "type",
+         "source", "episodes", "aired",
+         "duration", "rating", "score",
+         "rank", "scored_by", "popularity",
+         "members", "favorites", "related",
+         "genre", "watching", "completed",
+         "on_hold", "dropped", "plan_to_watch", "total"]
+dataset = read_csv(filename, index_col=False, quotechar = '"', delimiter = ',', quoting = csv.QUOTE_ALL, skipinitialspace = True, names=names)
+print("The dataset' size :")
 print(dataset.shape)
-# head
-print(dataset.head(1))
+types = dataset.dtypes
+description = dataset.describe()
+print(description)
+correlations = dataset.corr(method='pearson')
+print(correlations)
 # 2. Summarize Data
 # a) Descriptive statistics
 # b) Data visualizations
