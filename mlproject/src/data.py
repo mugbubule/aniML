@@ -24,21 +24,24 @@ from sklearn.ensemble import GradientBoostingRegressor
 from sklearn.ensemble import ExtraTreesRegressor
 from sklearn.ensemble import AdaBoostRegressor
 from sklearn.metrics import mean_squared_error
+from pprint import pprint
+
 
 class Data:
     # Load the csv file into pandas dataset
     def __init__(self, filename):
         self.names = ["id", "title", "type", "source", "episodes", "aired", "duration", "rating", "score", "rank",
                  "scored_by", "popularity","members", "favorites", "related", "genre", "watching", "completed",
-                 "on_hold", "dropped", "plan_to_watch", "total"]
+                 "on_hold", "dropped", "plan_to_watch", "total", ""]
         self.dataset = pd.read_csv(filename, index_col=0, quotechar='"', delimiter=',', quoting=csv.QUOTE_ALL,
-                               skipinitialspace=True, names=self.names)
+                               skipinitialspace=True, parse_dates=True, header=None, names=self.names)
         self.dataset["score"] = pd.to_numeric(self.dataset["score"], errors='coerce').fillna(0)
         self.dataset["completed"] = pd.to_numeric(self.dataset["completed"], errors='coerce').fillna(0)
         self.dataset["watching"] = pd.to_numeric(self.dataset["watching"], errors='coerce').fillna(0)
         self.dataset["rank"] = pd.to_numeric(self.dataset["rank"], errors='coerce').fillna(0)
         self.dataset["episodes"] = pd.to_numeric(self.dataset["episodes"], errors='coerce').fillna(0)
-        print(self.dataset.head(1))
+#        print(self.dataset.head(1))
+        pprint(self.dataset)
 
     # Print correlations stat data
     def visualize(self):
