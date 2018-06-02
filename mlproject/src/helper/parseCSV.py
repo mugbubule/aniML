@@ -82,11 +82,14 @@ def parseAnime(filename):
             results.append(row)
         writer = open("clean_anime.csv", "w+")
         for things in results:
-            for stuff in things:
+            i = 0
+            for i, stuff in enumerate(things):
                 if (isinstance(stuff, list)):
-                    writer.write("\"" + str(stuff).strip("[']") + "\", ")
+                    writer.write("\"" + str(stuff).strip("[']") + "\"")
                 else:
-                    writer.write(str(stuff) + ", ")
+                    writer.write(str(stuff))
+                if i < len(things) - 1:
+                    writer.write(", ")
             writer.write("\n");
     return results
 

@@ -1,0 +1,7 @@
+cleaning data
+on 4000, 10% is hentai, 5% have disrepencies
+regex to replace where stuff is wrong
+replace data
+^([^,]+), .*, \b(TV|OVA|Movie|Special|ONA|Music)\b
+^.*Hentai.*$
+^.*, ,.*$
