@@ -67,7 +67,7 @@ def parseAnime(filename):
         for row in reader:
             title = []
             title.append(row[TITLE])
-            row[TITLE] = title
+            row[TITLE] = "x"
             pprint(title)
             row[TYPE] = getID(row[TYPE])
             row[SOURCE] = getID(row[SOURCE])
