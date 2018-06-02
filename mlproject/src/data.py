@@ -56,10 +56,10 @@ class Data:
 
         print("\n============ DATASET GENERAL STATISTICS ============")
         print(self.dataset.describe())
-        pd.set_option('precision', 2)
-        correlations = self.dataset.corr(method='pearson')
 
         print("\n============ DATASET CORRELATIONS ============")
+        pd.set_option('precision', 3)
+        correlations = self.dataset.corr(method='pearson')
         print(correlations)
         print()
 
