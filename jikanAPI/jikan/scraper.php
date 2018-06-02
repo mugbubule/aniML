@@ -59,7 +59,7 @@ function scrapAnime($id, $anime_fd, $voice_actor_fd, $producer_fd, $licensor_fd,
   $line = "";
 
   $line .= $anime->response["mal_id"] . ", ";
-  $line .= $anime->response["title"] . ", ";
+  $line .= "\"" . $anime->response["title"] . "\", ";
   $line .= $anime->response["type"] . ", ";
   $line .= $anime->response["source"] . ", ";
   $line .= $anime->response["episodes"] . ", ";

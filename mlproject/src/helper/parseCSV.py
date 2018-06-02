@@ -61,39 +61,47 @@ def parseLicensor(filename):
 
 def parseAnime(filename):
     results = []
+    i = 0
     with open(filename) as csvfile:
         reader = csv.reader(csvfile, quotechar = '"', delimiter = ',', quoting = csv.QUOTE_ALL, skipinitialspace = True)
         for row in reader:
+            title = []
+            title.append(row[TITLE])
+            row[TITLE] = title
+            pprint(title)
             row[TYPE] = getID(row[TYPE])
             row[SOURCE] = getID(row[SOURCE])
-            row[DATE] = parse(row[DATE]).year
+            pprint(row[DATE])
+            row[DATE] = parse(row[DATE])
+            row[DATE] = row[DATE].year
             row[GENRE] = row[GENRE].strip(' ')[:-1].split(',')
             for i, genre in enumerate(row[GENRE]):
                 row[GENRE][i] = getID(genre)
             row[DURATION] = getID(row[DURATION])
             row[RATING] = getID(row[RATING])
             results.append(row)
-        writer = open("test", "w")
+        writer = open("clean_anime.csv", "w+")
         for things in results:
             for stuff in things:
                 if (isinstance(stuff, list)):
-                    writer.write("\"" + str(stuff).strip("[]") + "\", ")
+                    writer.write("\"" + str(stuff).strip("[']") + "\", ")
                 else:
                     writer.write(str(stuff) + ", ")
             writer.write("\n");
     return results
 
 pprint("#######  ANIME   #######")
-pprint(parseAnime("anime.csv"))
+#pprint(parseAnime("anime.csv"))
+parseAnime("../../../jikanAPI/jikan/anime.csv")
 pprint("#######  LICENSOR   #######")
-pprint(parseLicensor("licensor.csv"))
+#pprint(parseLicensor("licensor.csv"))
 pprint("#######  STUDIO   #######")
-pprint(parseLicensor("studio.csv"))
+#pprint(parseLicensor("studio.csv"))
 pprint("#######  LICENSOR   #######")
-pprint(parseLicensor("licensor.csv"))
+#pprint(parseLicensor("licensor.csv"))
 pprint("#######  PRODUCER   #######")
-pprint(parseLicensor("producer.csv"))
+#pprint(parseLicensor("producer.csv"))
 pprint("#######  STAFF   #######")
-pprint(parseStaff("staff.csv"))
+#pprint(parseStaff("staff.csv"))
 pprint("#######  VA   #######")
-pprint(parseSeiyuu("voice_actor.csv"))
+#pprint(parseSeiyuu("voice_actor.csv"))
