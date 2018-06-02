@@ -46,9 +46,9 @@ class Data:
     def plot(self):
         self.dataset.hist(sharex=False, sharey=False, xlabelsize=1, ylabelsize=1)
         pyplot.show()
-        self.dataset.plot(kind='density', subplots=True, layout=(4, 4), sharex=False, legend=False, fontsize=1)
+        self.dataset.plot(kind='density', subplots=True, layout=(5, 5), sharex=False, legend=True, fontsize=1)
         pyplot.show()
-        self.dataset.plot(kind='box', subplots=True, layout=(4, 4), sharex=False, sharey=False, fontsize=8)
+        self.dataset.plot(kind='box', subplots=True, layout=(5, 5), sharex=False, sharey=False, fontsize=8)
         pyplot.show()
 
     def plot_correlations(self):
