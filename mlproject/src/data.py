@@ -11,6 +11,7 @@ class Data:
         self.names = ["id", "title", "type", "source", "episodes", "aired", "duration", "rating", "score", "rank",
                       "scored_by", "popularity", "members", "favorites", "related", "genre", "watching", "completed",
                       "on_hold", "dropped", "plan_to_watch", "total"]
+
         self.dataset = pd.read_csv(filename, index_col=['id'], quotechar='"', delimiter=',', quoting=csv.QUOTE_ALL,
                                    skipinitialspace=True, parse_dates=True, header=None,  names=self.names,
                                    dtype={'title': object, 'type': np.int32, 'source': np.int32,
@@ -55,7 +56,7 @@ class Data:
                      "scored_by", "popularity", "members", "favorites", "related", "watching", "completed",
                      "on_hold", "dropped", "plan_to_watch", "total"]
         # plot correlation matrix
-        fig = pyplot.figure(figsize=(14, 8))
+        fig = pyplot.figure(figsize=(18, 14))
         ax = fig.add_subplot(111)
         cax = ax.matshow(self.correlations, vmin=-1, vmax=1)
         fig.colorbar(cax)

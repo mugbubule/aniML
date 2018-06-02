@@ -17,7 +17,6 @@ from sklearn.ensemble import GradientBoostingRegressor
 from sklearn.ensemble import ExtraTreesRegressor
 from sklearn.ensemble import AdaBoostRegressor
 from sklearn.metrics import mean_squared_error
-from pprint import pprint
 
 
 class Algorithm:
@@ -26,28 +25,33 @@ class Algorithm:
         self.X_validation = list
         self.Y_train = list
         self.Y_validation = list
-        self.num_folds = 10
-        self.seed = 7
-        self.scoring = ''
 
-    def evaluate(self, dataset):
-        # Split-out validation dataset
-        array = dataset.values
-        X = array[:, [3, 8, 9, 10, 11, 12, 13, 15, 16, 17, 18, 19, 20]]
-        Y = array[:, 7]
-        validation_size = 0.20
-        seed = 7
-        self.X_train, self.X_validation, self.Y_train, self.Y_validation = train_test_split(X, Y,
-                                                                                            test_size=validation_size,
-                                                                                            random_state=seed)
-        # Test options and evaluation metric
         self.num_folds = 10
         self.seed = 7
         self.scoring = 'neg_mean_squared_error'
 
+    def evaluate(self, dataset):
+        print("\n============ ALGORITHM EVALUATIONS ============")
+        names = ["title", "type", "source", "episodes", "aired", "duration", "rating", "score", "rank",
+                 "scored_by", "popularity", "members", "favorites", "related", "genre", "watching", "completed",
+                 "on_hold", "dropped", "plan_to_watch", "total"]
+
+        # Split-out validation dataset
+        array = dataset.values
+        X = array[:, [names.index("type"), names.index("source"),  names.index("episodes"),  names.index("aired"),
+                      names.index("duration"), names.index("rating"), names.index("scored_by"), names.index("popularity"),
+                      names.index("members"), names.index("favorites"), names.index("related")
+                      ]]
+        Y = array[:, names.index("score")]
+        validation_size = 0.20
+
+        # Test options and evaluation metric
+        self.X_train, self.X_validation, self.Y_train, self.Y_validation = train_test_split(X, Y,
+                                                                                            test_size=validation_size,
+                                                                                            random_state=self.seed)
         # Spot-Check Algorithms
         self.spot_algo(dataset)
-        self.standard_spot_algo(dataset)
+        #self.standard_spot_algo(dataset)
 
     def tune(self, dataset):
         # We can only start to develop this part once we found the most appropriate algo for our problem

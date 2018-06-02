@@ -17,13 +17,14 @@ def main():
     # c) Data transforms
     data.preprocess()
 
-    #algorithm = Algorithm()
+    algorithm = Algorithm()
 #   4. Evaluate Algorithms
     # a) Split-out validation dataset
     # b) Test options and evaluation metric
     # c) Spot Check Algorithms
     # d) Compare Algorithms
-    #algorithm.evaluate(data.dataset)
+
+    algorithm.evaluate(data.dataset)
 
 #   5. Improve Accuracy
 #   a) Algorithm tuning
