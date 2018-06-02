@@ -41,7 +41,6 @@ class Data:
         self.dataset["rank"] = pd.to_numeric(self.dataset["rank"], errors='coerce').fillna(0)
         self.dataset["episodes"] = pd.to_numeric(self.dataset["episodes"], errors='coerce').fillna(0)
         # print(self.dataset.head(1))
-        print(self.dataset.dtypes)
         # pprint(self.dataset)
 
     # Print correlations stat data
@@ -50,6 +49,10 @@ class Data:
         print(self.dataset.shape[0], end="", flush=True), print(" rows")
         print(self.dataset.shape[1], end="", flush=True), print(" colunms")
         pd.set_option('precision', 1)
+
+        print("\n============ DATASET TYPES ============")
+        print(self.dataset.dtypes)
+        print()
 
         print("\n============ DATASET GENERAL STATISTICS ============")
         print(self.dataset.describe())
