@@ -32,7 +32,7 @@ class Data:
     def __init__(self, filename):
         self.names = ["id", "title", "type", "source", "episodes", "aired", "duration", "rating", "score", "rank",
                  "scored_by", "popularity","members", "favorites", "related", "genre", "watching", "completed",
-                 "on_hold", "dropped", "plan_to_watch", "total", ""]
+                 "on_hold", "dropped", "plan_to_watch", "total"]
         self.dataset = pd.read_csv(filename, index_col=0, quotechar='"', delimiter=',', quoting=csv.QUOTE_ALL,
                                skipinitialspace=True, parse_dates=True, header=None, names=self.names)
         self.dataset["score"] = pd.to_numeric(self.dataset["score"], errors='coerce').fillna(0)
@@ -40,8 +40,9 @@ class Data:
         self.dataset["watching"] = pd.to_numeric(self.dataset["watching"], errors='coerce').fillna(0)
         self.dataset["rank"] = pd.to_numeric(self.dataset["rank"], errors='coerce').fillna(0)
         self.dataset["episodes"] = pd.to_numeric(self.dataset["episodes"], errors='coerce').fillna(0)
-#        print(self.dataset.head(1))
-        pprint(self.dataset)
+        # print(self.dataset.head(1))
+        print(self.dataset.dtypes)
+        # pprint(self.dataset)
 
     # Print correlations stat data
     def visualize(self):
@@ -63,9 +64,9 @@ class Data:
     def plot(self):
         self.dataset.hist(sharex=False, sharey=False, xlabelsize=1, ylabelsize=1)
         pyplot.show()
-        self.dataset.plot(kind= ' density ' , subplots=True, layout=(4,4), sharex=False, legend=False, fontsize=1)
+        self.dataset.plot(kind='density', subplots=True, layout=(4,4), sharex=False, legend=False, fontsize=1)
         pyplot.show()
-        self.dataset.plot(kind=' box ', subplots=True, layout=(4, 4), sharex=False, sharey=False, fontsize=8)
+        self.dataset.plot(kind='box', subplots=True, layout=(4, 4), sharex=False, sharey=False, fontsize=8)
         pyplot.show()
 
     def plot_correlations(self):
@@ -83,8 +84,8 @@ class Data:
     def compute(self):
         # Split-out validation dataset
         array = self.dataset.values
-        X = array[:, 0:13]
-        Y = array[:, 13]
+        X = array[:, 11:13]
+        Y = array[:, 8]
         validation_size = 0.20
         seed = 7
         X_train, X_validation, Y_train, Y_validation = train_test_split(X, Y, test_size=validation_size, random_state=seed)

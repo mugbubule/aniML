@@ -7,7 +7,7 @@ def main():
     #data.visualize()
     # data.plot()
     #data.plot_correlations()
-    #data.compute()
+    data.compute()
 
 if __name__ == "__main__":
     main()
