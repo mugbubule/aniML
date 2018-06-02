@@ -5,7 +5,6 @@ import numpy as np
 from numpy import arange
 from matplotlib import pyplot
 
-
 class Data:
     # Load the csv file into pandas dataset
     def __init__(self, filename):
@@ -38,8 +37,8 @@ class Data:
 
         print("\n============ DATASET CORRELATIONS ============")
         pd.set_option('precision', 3)
-        correlations = self.dataset.corr(method='pearson')
-        print(correlations)
+        self.correlations = self.dataset.corr(method='pearson')
+        print(self.correlations)
         print()
 
     # Plot the data
@@ -52,15 +51,19 @@ class Data:
         pyplot.show()
 
     def plot_correlations(self):
-        fig = pyplot.figure()
+        label_names = ["type", "source", "episodes", "aired", "duration", "rating", "score", "rank",
+                     "scored_by", "popularity", "members", "favorites", "related", "watching", "completed",
+                     "on_hold", "dropped", "plan_to_watch", "total"]
+        # plot correlation matrix
+        fig = pyplot.figure(figsize=(14, 8))
         ax = fig.add_subplot(111)
-        cax = ax.matshow(self.dataset.corr(), vmin=-1, vmax=1, interpolation='none')
+        cax = ax.matshow(self.correlations, vmin=-1, vmax=1)
         fig.colorbar(cax)
-        ticks = np.arange(0, 14, 1)
+        ticks = np.arange(0, 19, 1)
         ax.set_xticks(ticks)
         ax.set_yticks(ticks)
-        ax.set_xticklabels(self.names)
-        ax.set_yticklabels(self.names)
+        ax.set_xticklabels(label_names)
+        ax.set_yticklabels(label_names)
         pyplot.show()
 
     def preprocess(self):

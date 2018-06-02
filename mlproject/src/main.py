@@ -8,7 +8,7 @@ def main():
 #   a) Descriptive statistics
 #   b) Data visualizations
     data.visualize()
-    data.plot()
+    #data.plot()
     data.plot_correlations()
 
 #   3. Prepare Data
