@@ -35,19 +35,12 @@ class Data:
                             skipinitialspace=True, parse_dates=True, header=None, names=names)
         producer = pd.read_csv("../../jikanAPI/jikan/producer.csv", index_col=0, quotechar='"', delimiter=',', quoting=csv.QUOTE_ALL,
                             skipinitialspace=True, parse_dates=True, header=None, names=names)
-        pprint("####heeeeeyyyyy")
-        working_table = self.dataset
-        #working_table.
-        pprint(producer_val.groupby("producer_name").size())
-        #pprint(producer_val.producer_name.value_counts())
-        pprint("####heeeeeyyyyy")
-        #pd.merge(self.producer_val, dataset, left_on='id', right_on='anime_id')
 
     def __init__(self, filename):
         self.names = ["id", "title", "type", "source", "episodes", "aired", "duration", "rating", "score", "rank",
                       "scored_by", "popularity", "members", "favorites", "related", "genre", "watching", "completed",
                       "on_hold", "dropped", "plan_to_watch", "total"]
-
+        self.corr_factors = ['type', 'source', 'score', 'episodes', 'aired', 'duration', 'rating', 'related']
         self.dataset = pd.read_csv(filename, index_col=['id'], quotechar='"', delimiter=',', quoting=csv.QUOTE_ALL,
                                    skipinitialspace=True, parse_dates=True, header=None,  names=self.names,
                                    dtype={'title': object, 'type': np.int32, 'source': np.int32,
@@ -62,6 +55,12 @@ class Data:
         print(self.dataset.dtypes)
         print()
 
+    def compute_columns(self):
+        self.dataset['watching_percent'] = self.dataset['watching'] / self.dataset['total']
+        self.dataset['dropped_percent'] = self.dataset['dropped'] / self.dataset['total']
+        self.dataset['completed_percent'] = self.dataset['completed'] / self.dataset['total']
+        print()
+
     # Print correlations stat data
     def visualize(self):
         print("\n============ DATASET SIZE ============")
@@ -74,7 +73,7 @@ class Data:
 
         print("\n============ DATASET CORRELATIONS ============")
         pd.set_option('precision', 3)
-        self.correlations = self.dataset.corr(method='pearson')
+        self.correlations = self.dataset[self.corr_factors].corr(method='pearson')
         print(self.correlations)
         print()
 
@@ -100,19 +99,16 @@ class Data:
         pyplot.show()
 
     def plot_correlations(self):
-        label_names = ["type", "source", "episodes", "aired", "duration", "rating", "score", "rank",
-                     "scored_by", "popularity", "members", "favorites", "related", "watching", "completed",
-                     "on_hold", "dropped", "plan_to_watch", "total"]
         # plot correlation matrix
-        fig = pyplot.figure(figsize=(18, 14))
+        fig = pyplot.figure(figsize=(8, 8))
         ax = fig.add_subplot(111)
         cax = ax.matshow(self.correlations, vmin=-1, vmax=1)
         fig.colorbar(cax)
-        ticks = np.arange(0, 19, 1)
+        ticks = np.arange(0, len(self.corr_factors), 1)
         ax.set_xticks(ticks)
         ax.set_yticks(ticks)
-        ax.set_xticklabels(label_names)
-        ax.set_yticklabels(label_names)
+        ax.set_xticklabels(self.corr_factors)
+        ax.set_yticklabels(self.corr_factors)
         pyplot.show()
 
     def preprocess(self):

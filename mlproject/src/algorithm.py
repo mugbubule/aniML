@@ -74,7 +74,7 @@ class Algorithm:
                                                                                             random_state=self.seed)
         # Spot-Check Algorithms
         self.spot_algo(dataset)
-        #self.standard_spot_algo(dataset)
+        self.standard_spot_algo(dataset)
 
     def tune(self, dataset):
         # We can only start to develop this part once we found the most appropriate algo for our problem
