@@ -30,6 +30,20 @@ class Algorithm:
         self.seed = 7
         self.scoring = 'neg_mean_squared_error'
 
+
+    def rescale(self, X):
+        scaler = MinMaxScaler(feature_range=(0, 1))
+        return scaler.fit_transform(X)
+    def standardize(self, X):
+        scaler = StandardScaler().fit(X)
+        return scaler.transform(X)
+    def normalize(self, X):
+        scaler = Normalizer().fit(X)
+        return scaler.transform(X)
+    def binarize(self, X):
+        binarizer = Binarizer(threshold=0.0).fit(X)
+        return binarizer.transform(X)
+
     def evaluate(self, dataset):
         print("\n============ ALGORITHM EVALUATIONS ============")
         names = ["title", "type", "source", "episodes", "aired", "duration", "rating", "score", "rank",

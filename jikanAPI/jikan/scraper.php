@@ -9,7 +9,7 @@ if (count($argv) < 3) {
   exit(1);
 }
 
-$anime_fd = fopen("anime.csv", "a");
+$anime_fd = fopen("anime_old.csv", "a");
 $voice_actor_fd = fopen("voice_actor.csv", "a");
 $producer_fd = fopen("producer.csv", "a");
 $licensor_fd = fopen("licensor.csv", "a");
