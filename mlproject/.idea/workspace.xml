@@ -3,9 +3,6 @@
   <component name="ChangeListManager">
     <list default="true" id="27e9578b-bddb-4d7d-8709-0a33280dbcf4" name="Default" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/algorithm.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/algorithm.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/data.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/data.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/main.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -38,8 +35,11 @@
       <file leaf-file-name="algorithm.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/algorithm.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="180">
-              <caret line="12" column="27" lean-forward="true" selection-start-line="12" selection-start-column="27" selection-end-line="12" selection-end-column="27" />
+            <state relative-caret-position="405">
+              <caret line="27" lean-forward="true" selection-start-line="27" selection-end-line="27" />
+              <folding>
+                <element signature="e#0#11#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -360,7 +360,14 @@
       <option name="project" value="LOCAL" />
       <updated>1527933319484</updated>
     </task>
-    <option name="localTasksCounter" value="15" />
+    <task id="LOCAL-00015" summary="Scaling problem">
+      <created>1527935092027</created>
+      <option name="number" value="00015" />
+      <option name="presentableId" value="LOCAL-00015" />
+      <option name="project" value="LOCAL" />
+      <updated>1527935092027</updated>
+    </task>
+    <option name="localTasksCounter" value="16" />
     <servers />
   </component>
   <component name="TodoView">
@@ -381,12 +388,12 @@
       <window_info anchor="bottom" id="Database Changes" order="7" show_stripe_button="false" />
       <window_info anchor="bottom" id="Version Control" order="7" weight="0.24366042" />
       <window_info anchor="bottom" id="Python Console" order="7" weight="0.3296582" />
-      <window_info anchor="bottom" id="Run" order="2" sideWeight="0.64834577" visible="true" weight="0.33737597" />
+      <window_info active="true" anchor="bottom" id="Run" order="2" sideWeight="0.64834577" visible="true" weight="0.33737597" />
       <window_info anchor="bottom" id="Terminal" order="7" sideWeight="0.4985207" weight="0.32855567" />
       <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.20117396" />
       <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
       <window_info anchor="right" id="Database" order="3" />
-      <window_info active="true" anchor="right" id="SciView" order="3" visible="true" weight="0.28922093" />
+      <window_info anchor="right" id="SciView" order="3" visible="true" weight="0.28922093" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Debug" order="3" sideWeight="0.5864461" weight="0.39957035" />
@@ -466,7 +473,8 @@
     <MESSAGE value="adding algorithm class&#10;it can run 6 algorithms" />
     <MESSAGE value="correction of a crash during plot generation" />
     <MESSAGE value="Correction on the Correlation plot" />
-    <option name="LAST_COMMIT_MESSAGE" value="Correction on the Correlation plot" />
+    <MESSAGE value="Scaling problem" />
+    <option name="LAST_COMMIT_MESSAGE" value="Scaling problem" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -516,6 +524,9 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="570">
           <caret line="38" column="38" lean-forward="true" selection-start-line="38" selection-start-column="38" selection-end-line="38" selection-end-column="38" />
+          <folding>
+            <element signature="e#0#11#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -533,6 +544,9 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="210">
           <caret line="33" column="38" lean-forward="true" selection-start-line="33" selection-start-column="38" selection-end-line="33" selection-end-column="38" />
+          <folding>
+            <element signature="e#0#11#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -850,8 +864,11 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/algorithm.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="180">
-          <caret line="12" column="27" lean-forward="true" selection-start-line="12" selection-start-column="27" selection-end-line="12" selection-end-column="27" />
+        <state relative-caret-position="405">
+          <caret line="27" lean-forward="true" selection-start-line="27" selection-end-line="27" />
+          <folding>
+            <element signature="e#0#11#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
