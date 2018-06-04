@@ -6,12 +6,15 @@ from matplotlib import pyplot
 
 class Data:
     # Load the csv file into pandas dataset
-    def work_on_data(self):
+    def work_on_data(self): # ça à l'air bon mais omg faut vérifier
         names = ["producer_name", "anime_id"]
-        producer_val = pd.read_csv("../../jikanAPI/jikan/producer.csv", index_col=0, quotechar='"', delimiter=',', quoting=csv.QUOTE_ALL,
-                            skipinitialspace=True, parse_dates=True, header=None, names=names)
-        producer = pd.read_csv("../../jikanAPI/jikan/producer.csv", index_col=0, quotechar='"', delimiter=',', quoting=csv.QUOTE_ALL,
-                            skipinitialspace=True, parse_dates=True, header=None, names=names)
+        producer = pd.read_csv("../../jikanAPI/jikan/producer.csv", quotechar='"', delimiter=',', quoting=csv.QUOTE_ALL,
+                            skipinitialspace=True, parse_dates=True, header=None, names=names,
+                            dtype={'producer_name': object})
+        producer_val = producer.groupby("producer_name").size().to_frame('producer_val');
+        working_table = pd.merge(producer, producer_val, left_on='producer_name', right_on='producer_name')
+        working_table = self.dataset.merge(working_table, left_index=True, right_on='anime_id')
+        working_table = working_table.groupby('anime_id').sum()
 
     def __init__(self, filename):
         self.names = ["id", "title", "type", "source", "episodes", "aired", "duration", "rating", "score", "rank",
@@ -34,6 +37,7 @@ class Data:
         print(self.dataset.dtypes)
         print()
         self.compute_columns()
+        self.work_on_data()
 
     def compute_columns(self):
         self.dataset['watching_percent'] = self.dataset['watching'] / self.dataset['total']
@@ -88,4 +92,3 @@ class Data:
         ax.set_xticklabels(self.features_selected)
         ax.set_yticklabels(self.features_selected)
         pyplot.show()
-
