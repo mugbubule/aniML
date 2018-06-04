@@ -1,30 +1,7 @@
 import csv
 import pandas as pd
-from matplotlib import pyplot
 import numpy as np
-from numpy import arange
 from matplotlib import pyplot
-from pandas import read_csv
-from pandas import set_option
-from pandas.plotting import scatter_matrix
-from sklearn.preprocessing import StandardScaler
-from sklearn.model_selection import train_test_split
-from sklearn.model_selection import KFold
-from sklearn.model_selection import cross_val_score
-from sklearn.model_selection import GridSearchCV
-from sklearn.linear_model import LinearRegression
-from sklearn.linear_model import Lasso
-from sklearn.linear_model import ElasticNet
-from sklearn.tree import DecisionTreeRegressor
-from sklearn.neighbors import KNeighborsRegressor
-from sklearn.svm import SVR
-from sklearn.pipeline import Pipeline
-from sklearn.ensemble import RandomForestRegressor
-from sklearn.ensemble import GradientBoostingRegressor
-from sklearn.ensemble import ExtraTreesRegressor
-from sklearn.ensemble import AdaBoostRegressor
-from sklearn.metrics import mean_squared_error
-from pprint import pprint
 
 
 class Data:
@@ -40,25 +17,38 @@ class Data:
         self.names = ["id", "title", "type", "source", "episodes", "aired", "duration", "rating", "score", "rank",
                       "scored_by", "popularity", "members", "favorites", "related", "genre", "watching", "completed",
                       "on_hold", "dropped", "plan_to_watch", "total"]
-        self.corr_factors = ['type', 'source', 'score', 'episodes', 'aired', 'duration', 'rating', 'related']
+
+        self.features_selected = ['type', 'source', 'score', 'episodes', 'aired', 'duration', 'rating', 'related']
+
         self.dataset = pd.read_csv(filename, index_col=['id'], quotechar='"', delimiter=',', quoting=csv.QUOTE_ALL,
-                                   skipinitialspace=True, parse_dates=True, header=None,  names=self.names,
-                                   dtype={'title': object, 'type': np.int32, 'source': np.int32,
+                                   skipinitialspace=True, header=None,  names=self.names,
+                                   dtype={'title': str, 'type': np.int32, 'source': np.int32,
                                           'episodes': np.int32, 'aired': np.int32, 'duration': np.int32,
                                           'rating': np.int32, 'score': np.float64, 'rank': np.int32,
                                           'scored_by': np.int32, 'popularity': np.int32, 'members': np.int32,
-                                          'favorites': np.int32, 'related': np.int32, 'genre': object,
+                                          'favorites': np.int32, 'related': np.int32, 'genre': str,
                                           'watching': np.int32, 'completed': np.int32, 'on_hold': np.int32,
                                           'dropped': np.int32, 'plan_to_watch': np.int32, 'total': np.int32})
 
         print("\n============ DATASET TYPES ============")
         print(self.dataset.dtypes)
         print()
+        self.compute_columns()
 
     def compute_columns(self):
         self.dataset['watching_percent'] = self.dataset['watching'] / self.dataset['total']
         self.dataset['dropped_percent'] = self.dataset['dropped'] / self.dataset['total']
         self.dataset['completed_percent'] = self.dataset['completed'] / self.dataset['total']
+        self.names.append("watching_percent");
+        self.names.append("dropped_percent");
+        self.names.append("completed_percent");
+
+        self.features_selected.append("watching_percent");
+        self.features_selected.append("dropped_percent");
+        self.features_selected.append("completed_percent");
+
+        print("\n============ NEW DATASET TYPES ============")
+        print(self.dataset.dtypes)
         print()
 
     # Print correlations stat data
@@ -73,22 +63,10 @@ class Data:
 
         print("\n============ DATASET CORRELATIONS ============")
         pd.set_option('precision', 3)
-        self.correlations = self.dataset[self.corr_factors].corr(method='pearson')
+        self.correlations = self.dataset[self.features_selected].corr(method='pearson')
         print(self.correlations)
         print()
 
-    def rescale(self, X):
-        scaler = MinMaxScaler(feature_range=(0, 1))
-        return scaler.fit_transform(X)
-    def standardize(self, X):
-        scaler = StandardScaler().fit(X)
-        return scaler.transform(X)
-    def normalize(self, X):
-        scaler = Normalizer().fit(X)
-        return scaler.transform(X)
-    def binarize(self, X):
-        binarizer = Binarizer(threshold=0.0).fit(X)
-        return binarizer.transform(X)
     # Plot the data
     def plot(self):
         self.dataset.hist(sharex=False, sharey=False, xlabelsize=1, ylabelsize=1)
@@ -104,12 +82,10 @@ class Data:
         ax = fig.add_subplot(111)
         cax = ax.matshow(self.correlations, vmin=-1, vmax=1)
         fig.colorbar(cax)
-        ticks = np.arange(0, len(self.corr_factors), 1)
+        ticks = np.arange(0, len(self.features_selected), 1)
         ax.set_xticks(ticks)
         ax.set_yticks(ticks)
-        ax.set_xticklabels(self.corr_factors)
-        ax.set_yticklabels(self.corr_factors)
+        ax.set_xticklabels(self.features_selected)
+        ax.set_yticklabels(self.features_selected)
         pyplot.show()
 
-    def preprocess(self):
-        print("\n============ DATASET PREPROCESSING ============")
