@@ -1,5 +1,6 @@
 import data
 from matplotlib import pyplot
+from numpy import set_printoptions
 from sklearn.preprocessing import StandardScaler
 from sklearn.model_selection import train_test_split
 from sklearn.model_selection import KFold
@@ -17,6 +18,10 @@ from sklearn.ensemble import GradientBoostingRegressor
 from sklearn.ensemble import ExtraTreesRegressor
 from sklearn.ensemble import AdaBoostRegressor
 from sklearn.metrics import mean_squared_error
+from sklearn.preprocessing import MinMaxScaler
+from sklearn.preprocessing import StandardScaler
+from sklearn.preprocessing import Normalizer
+from sklearn.preprocessing import Binarizer
 
 
 class Algorithm:
@@ -29,7 +34,6 @@ class Algorithm:
         self.num_folds = 10
         self.seed = 7
         self.scoring = 'neg_mean_squared_error'
-
 
     def rescale(self, X):
         scaler = MinMaxScaler(feature_range=(0, 1))
@@ -58,7 +62,12 @@ class Algorithm:
                       ]]
         Y = array[:, names.index("score")]
         validation_size = 0.20
-
+        print("it broke")
+        set_printoptions(precision=3)
+        print(X)
+        X = self.rescale(X)
+        print("fixed it")
+        print(X)
         # Test options and evaluation metric
         self.X_train, self.X_validation, self.Y_train, self.Y_validation = train_test_split(X, Y,
                                                                                             test_size=validation_size,

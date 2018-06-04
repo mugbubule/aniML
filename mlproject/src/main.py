@@ -8,14 +8,9 @@ def main():
 #   a) Descriptive statistics
 #   b) Data visualizations
     data.visualize()
-<<<<<<< HEAD
+
     #data.plot()
     data.plot_correlations()
-=======
-    data.plot()
-    #data.plot_correlations()
-    data.compute()
->>>>>>> data + normalize functions in data.py
 
 #   3. Prepare Data
     # a) Data Cleaning
