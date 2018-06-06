@@ -1,5 +1,6 @@
 from numpy import set_printoptions
 import numpy as np
+import pandas as pd
 from sklearn.preprocessing import MinMaxScaler
 from sklearn.preprocessing import Normalizer
 from sklearn.preprocessing import Binarizer
@@ -137,6 +138,7 @@ class Algorithm:
             print("%f (%f) with: %r" % (mean, stdev, param))
 
     def finalize(self, data):
+        print("\n====== FINALIZATION ======")
         # prepare the model
         scaler = StandardScaler().fit(self.X_train)
         rescaledX = scaler.transform(self.X_train)
@@ -146,8 +148,9 @@ class Algorithm:
         # transform the validation dataset
         rescaledValidationX = scaler.transform(self.X_validation)
         predictions = model.predict(rescaledValidationX)
-
-        print("\nFinal score: ", end="", flush=True), print(mean_squared_error(self.Y_validation, predictions))
+        d = pd.DataFrame({'Actual value': self.Y_validation, 'Predicted value': predictions})
+        print(d)
+        print("\nFinal MSE: ", end="", flush=True), print(mean_squared_error(self.Y_validation, predictions))
 
     def spot_algo(self, dataset):
         results = []
