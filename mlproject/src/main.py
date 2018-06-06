@@ -28,13 +28,12 @@ def main():
 #   5. Improve Accuracy
 #   a) Algorithm tuning
 #   b) Ensembles
-    #algorithm.tune(data.dataset)
 
 #   6. Finalize Model
 #   a) Predictions on validation dataset
 #   b) Create standalone model on entire training dataset
 #   c) Save model for later use
-    #algorithm.finalize(data.dataset)
+    algorithm.finalize(data.dataset)
 
 if __name__ == "__main__":
     main()

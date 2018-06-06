@@ -1,7 +1,9 @@
-import data
-from matplotlib import pyplot
 from numpy import set_printoptions
 import numpy as np
+from sklearn.preprocessing import MinMaxScaler
+from sklearn.preprocessing import Normalizer
+from sklearn.preprocessing import Binarizer
+from matplotlib import pyplot
 from sklearn.preprocessing import StandardScaler
 from sklearn.model_selection import train_test_split
 from sklearn.model_selection import KFold
@@ -14,12 +16,11 @@ from sklearn.tree import DecisionTreeRegressor
 from sklearn.neighbors import KNeighborsRegressor
 from sklearn.svm import SVR
 from sklearn.pipeline import Pipeline
+from sklearn.ensemble import RandomForestRegressor
 from sklearn.ensemble import GradientBoostingRegressor
+from sklearn.ensemble import ExtraTreesRegressor
+from sklearn.ensemble import AdaBoostRegressor
 from sklearn.metrics import mean_squared_error
-from sklearn.preprocessing import MinMaxScaler
-from sklearn.preprocessing import StandardScaler
-from sklearn.preprocessing import Normalizer
-from sklearn.preprocessing import Binarizer
 
 class Algorithm:
 
@@ -37,9 +38,10 @@ class Algorithm:
 
         array = dataset.values
         X = array[:, coorIndex]
-        Y = np.asarray(dataset['score'], dtype=int)
+        Y = np.asarray(dataset['score'], dtype=float)
         set_printoptions(precision=3)
         X = self.normalize(X)
+
         return X, Y
 
     def evaluate(self, data):
@@ -54,27 +56,98 @@ class Algorithm:
             if s is not "score":
                 features_index.append(names.index(s))
         X, Y = self.preprocess(dataset, features_index)
-        self.X_train, self.X_validation, self.Y_train, self.Y_validation = train_test_split(X, Y, test_size=validation_size,
-                                                                                                  random_state=self.seed)
+        self.X_train, self.X_validation, self.Y_train, self.Y_validation = train_test_split(X, Y,
+                                                                                            test_size=validation_size,
+                                                                                            random_state=self.seed)
+        # regressor = LinearRegression()
+        # regressor.fit(self.X_train, self.Y_train)
+        # self.Y_validation = regressor.predict(self.X_train)
+        # df = pd.DataFrame({'Actual':  self.Y_train, 'Predicted':  self.Y_validation})
+        # print(df)
         # Spot-Check Algorithms
         self.spot_algo(dataset)
         self.standard_spot_algo(dataset)
+        self.tune(data)
+        self.ensemble_methods(dataset)
+        self.tune_ensemble(dataset)
+
+    def ensemble_methods(self, dataset):
+        print("\n============ ENSEMBLE EVALUATIONS ============")
+        ensembles = []
+        ensembles.append(('ScaledAB', Pipeline([('Scaler', StandardScaler()), ('AB',
+                                                                                   AdaBoostRegressor())])))
+        ensembles.append(('ScaledGBM', Pipeline([('Scaler', StandardScaler()), ('GBM',
+                                                                                    GradientBoostingRegressor())])))
+        ensembles.append(('ScaledRF', Pipeline([('Scaler', StandardScaler()), ('RF',
+                                                                                   RandomForestRegressor())])))
+        ensembles.append(('ScaledET', Pipeline([('Scaler', StandardScaler()), ('ET',
+                                                                                   ExtraTreesRegressor())])))
+        results = []
+        names = []
+        for name, model in ensembles:
+            kfold = KFold(n_splits=self.num_folds, random_state=self.seed)
+            cv_results = cross_val_score(model, self.X_train, self.Y_train, cv=kfold, scoring=self.scoring)
+            results.append(cv_results)
+            names.append(name)
+            msg = "%s: %f (%f)" % (name, cv_results.mean(), cv_results.std())
+            print(msg)
+        # Compare Algorithms
+        fig = pyplot.figure()
+        fig.suptitle(' Scaled Ensemble Algorithm Comparison ')
+        ax = fig.add_subplot(111)
+        pyplot.boxplot(results)
+        ax.set_xticklabels(names)
+        pyplot.show()
+
+    def tune_ensemble(self, data):
+        # We can only start to develop this part once we found the most appropriate algo for our problem
+        print("\n============ GBM ALGORITHM TUNING ============")
+        # Tune scaled GBM
+        scaler = StandardScaler().fit(self.X_train)
+        rescaledX = scaler.transform(self.X_train)
+        param_grid = dict(n_estimators=np.array([50, 100, 150, 200, 250, 300, 350, 400]))
+        model = GradientBoostingRegressor(random_state=self.seed)
+        kfold = KFold(n_splits=self.num_folds, random_state=self.seed)
+        grid = GridSearchCV(estimator=model, param_grid=param_grid, scoring=self.scoring, cv=kfold)
+        grid_result = grid.fit(rescaledX, self.Y_train)
+        print("Best: %f using %s" % (grid_result.best_score_, grid_result.best_params_))
+        means = grid_result.cv_results_['mean_test_score']
+        stds = grid_result.cv_results_['std_test_score']
+        params = grid_result.cv_results_['params']
+        for mean, stdev, param in zip(means, stds, params):
+            print("%f (%f) with: %r" % (mean, stdev, param))
 
     def tune(self, data):
         # We can only start to develop this part once we found the most appropriate algo for our problem
-        print("\n============ ALGORITHM TUNING ============")
+        print("\n============ KNN TUNING ============")
+        # KNN Algorithm tuning
+        scaler = StandardScaler().fit(self.X_train)
+        rescaledX = scaler.transform(self.X_train)
+        k_values = np.array([1, 3, 5, 7, 9, 11, 13, 15, 17, 19, 21])
+        param_grid = dict(n_neighbors=k_values)
+        model = KNeighborsRegressor()
+        kfold = KFold(n_splits=self.num_folds, random_state=self.seed)
+        grid = GridSearchCV(estimator=model, param_grid=param_grid, scoring=self.scoring, cv=kfold)
+        grid_result = grid.fit(rescaledX, self.Y_train)
+        print("Best: %f using %s" % (grid_result.best_score_, grid_result.best_params_))
+        means = grid_result.cv_results_['mean_test_score']
+        stds = grid_result.cv_results_['std_test_score']
+        params = grid_result.cv_results_['params']
+        for mean, stdev, param in zip(means, stds, params):
+            print("%f (%f) with: %r" % (mean, stdev, param))
 
     def finalize(self, data):
         # prepare the model
         scaler = StandardScaler().fit(self.X_train)
         rescaledX = scaler.transform(self.X_train)
-        model = GradientBoostingRegressor(random_state=self.seed, n_estimators=400)
+        model = GradientBoostingRegressor(random_state=self.seed, n_estimators=250)
         model.fit(rescaledX, self.Y_train)
 
         # transform the validation dataset
         rescaledValidationX = scaler.transform(self.X_validation)
         predictions = model.predict(rescaledValidationX)
-        print(mean_squared_error(self.Y_validation, predictions))
+
+        print("\nFinal score: ", end="", flush=True), print(mean_squared_error(self.Y_validation, predictions))
 
     def spot_algo(self, dataset):
         results = []
@@ -128,7 +201,7 @@ class Algorithm:
         pyplot.show()
 
     def rescale(self, X):
-        scaler = MinMaxScaler(feature_range=(0, 100))
+        scaler = MinMaxScaler(feature_range=(0, 1))
         return scaler.fit_transform(X)
 
     def standardize(self, X):
