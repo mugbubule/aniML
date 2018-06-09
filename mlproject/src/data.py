@@ -6,6 +6,16 @@ from matplotlib import pyplot
 
 class Data:
     # Load the csv file into pandas dataset
+    def voice_actor(self):
+        names = ["voice_actor_id", "voice_actor_name", "anime_id"]
+        voice_actor = pd.read_csv("../../jikanAPI/jikan/voice_actor.csv", quotechar='"', delimiter=',', quoting=csv.QUOTE_ALL,
+                            skipinitialspace=True, parse_dates=True, header=None, names=names,
+                            dtype={'voice_actor_id': np.int32, 'voice_actor_name': object, "anime_id": np.int32})
+        voice_actor_val = voice_actor.groupby("voice_actor_name").size().to_frame('voice_actor_val');
+        working_table = pd.merge(voice_actor, voice_actor_val, left_on='voice_actor_name', right_on='voice_actor_name')
+        working_table = self.dataset.merge(working_table, left_index=True, right_on='anime_id')
+        working_table = working_table.groupby('anime_id').sum()
+
     def work_on_data(self): # ça à l'air bon mais omg faut vérifier
         names = ["producer_name", "anime_id"]
         producer = pd.read_csv("../../jikanAPI/jikan/producer.csv", quotechar='"', delimiter=',', quoting=csv.QUOTE_ALL,
