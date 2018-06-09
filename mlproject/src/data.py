@@ -84,8 +84,7 @@ class Data:
         print()
         self.compute_columns()
 
-
-    def compute_columns(self):
+    def staff_columns(self):
         self.add_producer()
         self.add_staff()
         self.add_studio()
@@ -99,6 +98,16 @@ class Data:
         self.features_selected.append("studio_val");
         self.features_selected.append("voice_actor_val");
 
+    def compute_columns(self):
+        self.dataset['watching%'] = self.dataset['watching'] / self.dataset['total']
+        self.dataset['dropped%'] = self.dataset['dropped'] / self.dataset['total']
+        self.dataset['completed%'] = self.dataset['completed'] / self.dataset['total']
+        self.names.append("watching%");
+        self.names.append("dropped%");
+        self.names.append("completed%");
+        self.features_selected.append("watching%");
+        self.features_selected.append("dropped%");
+        self.features_selected.append("completed%");
 
         print("\n============ NEW DATASET TYPES ============")
         print(self.dataset.dtypes)
@@ -131,7 +140,7 @@ class Data:
 
     def plot_correlations(self):
         # plot correlation matrix
-        fig = pyplot.figure(figsize=(8, 8))
+        fig = pyplot.figure(figsize=(14, 10))
         ax = fig.add_subplot(111)
         cax = ax.matshow(self.correlations, vmin=-1, vmax=1)
         fig.colorbar(cax)
