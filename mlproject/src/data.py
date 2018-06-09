@@ -31,7 +31,7 @@ class Data:
         working_table = working_table.groupby('anime_id').sum()
         self.dataset = working_table
         print(working_table)
-        self.add_studio()
+
 
     def add_voice_actor(self):
         names = ["voice_actor_id", "voice_actor_name", "voice_actor_surname", "anime_id"]
@@ -47,7 +47,6 @@ class Data:
         working_table = working_table.groupby('anime_id').sum()
         self.dataset = working_table
         print(working_table)
-        self.add_staff()
 
     def add_producer(self): # ça à l'air bon mais omg faut vérifier
         print(self.dataset)
@@ -61,7 +60,7 @@ class Data:
         working_table = working_table.groupby('anime_id').sum()
         print(working_table)
         self.dataset = working_table
-        self.add_voice_actor()
+
 
     def __init__(self, filename):
         self.names = ["id", "title", "type", "source", "episodes", "aired", "duration", "rating", "score", "rank",
@@ -84,19 +83,22 @@ class Data:
         print(self.dataset.dtypes)
         print()
         self.compute_columns()
-        self.add_producer()
+
 
     def compute_columns(self):
-        self.dataset['watching_percent'] = self.dataset['watching'] / self.dataset['total']
-        self.dataset['dropped_percent'] = self.dataset['dropped'] / self.dataset['total']
-        self.dataset['completed_percent'] = self.dataset['completed'] / self.dataset['total']
-        self.names.append("watching_percent");
-        self.names.append("dropped_percent");
-        self.names.append("completed_percent");
+        self.add_producer()
+        self.add_staff()
+        self.add_studio()
+        self.add_voice_actor()
+        self.names.append("producer_val");
+        self.names.append("staff_val");
+        self.names.append("studio_val");
+        self.names.append("voice_actor_val");
+        self.features_selected.append("producer_val");
+        self.features_selected.append("staff_val");
+        self.features_selected.append("studio_val");
+        self.features_selected.append("voice_actor_val");
 
-        self.features_selected.append("watching_percent");
-        self.features_selected.append("dropped_percent");
-        self.features_selected.append("completed_percent");
 
         print("\n============ NEW DATASET TYPES ============")
         print(self.dataset.dtypes)
