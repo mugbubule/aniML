@@ -6329,7 +6329,7 @@ Imagica, 3829
 Hakuhodo, 3829
 Nichion, 3829
 Bungeishunjuu, 3829
-Tokyo FM Broadcasting CO., LTD, 3829
+"Tokyo FM Broadcasting CO., LTD", 3829
 Y.O.U.C, 3833
 Trans Arts, 3835
 Mainichi Broadcasting System, 3835
@@ -6490,12 +6490,12 @@ Shogakukan Productions, 4447
 Tokyo Movie Shinsha, 4447
 Big Bang, 4447
 NHK, 4459
-Yamamura Animation, Inc., 4461
+"Yamamura Animation, Inc.", 4461
 NuTech Digital, 4463
 Bandai Visual, 4469
 Bandai Visual, 4471
 Milky Animation Label, 4473
-Yamamura Animation, Inc., 4475
+"Yamamura Animation, Inc.", 4475
 Fuji TV, 4477
 Asmik Ace Entertainment, 4477
 Sony Music Entertainment, 4477
@@ -7017,7 +7017,7 @@ Rondo Robe, 6783
 Lantis, 6787
 Beyond C., 6795
 Dentsu, 6797
-Yamamura Animation, Inc., 6797
+"Yamamura Animation, Inc.", 6797
 Aniplex, 6811
 YTV, 6811
 Shogakukan, 6811
@@ -7037,7 +7037,7 @@ Fuji TV, 6917
 Sony Pictures Entertainment, 6919
 Atelier Musa, 6919
 Asmik Ace Entertainment, 6927
-Yamamura Animation, Inc., 6935
+"Yamamura Animation, Inc.", 6935
 Group TAC, 6939
 AC Create, 6947
 TV Tokyo, 6951
@@ -7099,8 +7099,8 @@ Big West, 7405
 Milky Animation Label, 7411
 MS Pictures, 7411
 The Village of Marchen, 7423
-Yamamura Animation, Inc., 7445
-Yamamura Animation, Inc., 7451
+"Yamamura Animation, Inc.", 7445
+"Yamamura Animation, Inc.", 7451
 Studio 9 MAiami, 7455
 dwarf, 7461
 TBS, 7463
@@ -7259,7 +7259,7 @@ CoMix Wave Films, 8297
 TV Tokyo, 8311
 Shogakukan Productions, 8331
 Tokyo Movie Shinsha, 8331
-Yamamura Animation, Inc., 8333
+"Yamamura Animation, Inc.", 8333
 DAX Production, 8339
 NHK, 8345
 Think Corporation, 8353
@@ -8044,7 +8044,7 @@ Movic, 11577
 AT-X, 11577
 Kadokawa Pictures Japan, 11577
 MAGES., 11577
-Yamamura Animation, Inc., 11579
+"Yamamura Animation, Inc.", 11579
 TV Asahi, 11595
 Asatsu DK, 11595
 Aniplex, 11597
@@ -10004,7 +10004,7 @@ ZIZ Entertainment (ZIZ), 29852
 Sotsu, 29854
 Showgate, 29854
 Tokuma Japan Communications, 29854
-Daiichi Shokai CO., LTD, 29854
+"Daiichi Shokai CO., LTD", 29854
 NHK, 29856
 Kinoshita Group Holdings, 29868
 Yaoqi, 29876
@@ -10214,7 +10214,7 @@ Furyu, 31080
 Sotsu, 31098
 Showgate, 31098
 Tokuma Japan Communications, 31098
-Daiichi Shokai CO., LTD, 31098
+"Daiichi Shokai CO., LTD", 31098
 Pink Pineapple, 31118
 T-Rex, 31118
 Mainichi Broadcasting System, 31128
@@ -10230,7 +10230,7 @@ TV Tokyo, 31174
 Dentsu, 31174
 Rakuonsha, 31174
 Avex Pictures, 31174
-Daiichi Shokai CO., LTD, 31174
+"Daiichi Shokai CO., LTD", 31174
 Fujio Production, 31174
 Broccoli, 31178
 Movic, 31178
@@ -10337,7 +10337,7 @@ famima.com, 31452
 Hakuhodo DY Music &amp; Pictures, 31452
 Docomo Anime Store, 31452
 TEAM Entertainment Inc., 31452
-Chugai Mining Co., Ltd., 31452
+"Chugai Mining Co., Ltd.", 31452
 Medicos Entertainment, 31452
 Toshiba Digital Frontiers, 31452
 Frontier Works, 31456
@@ -10347,7 +10347,7 @@ DAX Production, 31456
 Asmik Ace Entertainment, 31456
 Sony Music Communications, 31456
 Hakuhodo DY Music &amp; Pictures, 31456
-Chugai Mining Co., Ltd., 31456
+"Chugai Mining Co., Ltd.", 31456
 Kadokawa, 31456
 Lantis, 31478
 Movic, 31478
@@ -10468,7 +10468,7 @@ TV Tokyo, 31750
 TBS, 31754
 Aniplex, 31758
 Kodansha, 31758
-Yamamura Animation, Inc., 31760
+"Yamamura Animation, Inc.", 31760
 Avex Pictures, 31762
 Imagin, 31764
 Magic Capsule, 31764
@@ -11116,7 +11116,7 @@ Shochiku, 33964
 Mainichi Broadcasting System, 33964
 Aniplex, 33988
 Kodansha, 33988
-Kanetsu Co., LTD., 33988
+"Kanetsu Co., LTD.", 33988
 Sanrio, 33998
 Sanrio, 34000
 Toei Animation, 34006
@@ -11242,7 +11242,7 @@ AT-X, 34280
 NBCUniversal Entertainment Japan, 34280
 Tokyo MX, 34280
 i0+, 34280
-Chugai Mining Co., Ltd., 34280
+"Chugai Mining Co., Ltd.", 34280
 BS11, 34280
 Dentsu, 34284
 Mainichi Broadcasting System, 34284
@@ -11294,7 +11294,7 @@ Crunchyroll SC Anime Fund, 34382
 Pink Pineapple, 34388
 Smiral Animation, 34392
 Just Pro, 34402
-Kanetsu Co., LTD., 34402
+"Kanetsu Co., LTD.", 34402
 NHK, 34406
 G.CMay Animation &amp; Film, 34410
 Bushiroad, 34412
@@ -11546,7 +11546,7 @@ Lantis, 35082
 Shochiku, 35082
 Pony Canyon, 35082
 Kyotoma, 35114
-Kanetsu Co., LTD., 35114
+"Kanetsu Co., LTD.", 35114
 Aniplex, 35120
 Dynamic Planning, 35120
 Kodansha, 35122
@@ -11776,7 +11776,7 @@ Dentsu, 35968
 Fuji TV, 35968
 Half H.P Studio, 35968
 Ichijinsha, 35968
-Kanetsu Co., LTD., 35968
+"Kanetsu Co., LTD.", 35968
 Space Shower Music, 35974
 Shochiku, 35984
 AZ Creative, 35988
@@ -11823,7 +11823,7 @@ Yomiuri TV Enterprise, 36124
 Pony Canyon Enterprise, 36124
 Smiral Animation, 36124
 Crunchyroll SC Anime Fund, 36124
-Muse Communication Co., Ltd., 36124
+"Muse Communication Co., Ltd.", 36124
 RX-RECORDS, 36136
 UK.PROJECT INC., 36136
 Tohokushinsha Film Corporation, 36144
@@ -12173,7 +12173,7 @@ Bandai Visual, 29283
 Triangle Staff, 29283
 Starchild Records, 29301
 Grooove, 29301
-Yamamura Animation, Inc., 29311
+"Yamamura Animation, Inc.", 29311
 Aniplex, 29317
 TOHO animation, 29325
 NHK, 29351
@@ -12478,7 +12478,7 @@ Lantis, 30795
 DAX Production, 30795
 NBCUniversal Entertainment Japan, 30795
 Akita Shoten, 30795
-eBooK Initiative Japan CO., LTD, 30795
+"eBooK Initiative Japan CO., LTD", 30795
 EDGE, 30817
 Half H.P Studio, 30831
 Nippon Columbia, 30831
@@ -12692,7 +12692,7 @@ Rakuonsha, 31749
 Yamato Works, 31749
 Aniplex, 31757
 Kodansha, 31757
-Yamamura Animation, Inc., 31759
+"Yamamura Animation, Inc.", 31759
 Aniplex, 31765
 NHK, 31769
 Production I.G, 31771
@@ -13059,7 +13059,7 @@ Ultra Super Pictures, 32951
 Tohokushinsha Film Corporation, 32951
 Sony Music Communications, 32951
 Fujimi Shobo, 32951
-Kanetsu Co., LTD., 32951
+"Kanetsu Co., LTD.", 32951
 Lantis, 32953
 Sotsu, 32961
 Lantis, 32961
@@ -13562,7 +13562,7 @@ MAGES., 34403
 Glovision, 34403
 Kadokawa Media House, 34403
 Sun TV, 34403
-Kanetsu Co., LTD., 34403
+"Kanetsu Co., LTD.", 34403
 Frontier Works, 34427
 Pony Canyon, 34427
 Nippon Columbia, 34427
@@ -13650,7 +13650,7 @@ Lucent Pictures Entertainment, 34547
 Hakuhodo DY Music &amp; Pictures, 34547
 Lawson, 34547
 GYAO!, 34547
-Kanetsu Co., LTD., 34547
+"Kanetsu Co., LTD.", 34547
 NHK, 34549
 Dwango, 34549
 Aniplex, 34561
@@ -13675,7 +13675,7 @@ Takeshobo, 34599
 Sony Music Communications, 34599
 Kadokawa Media House, 34599
 Cygames, 34599
-Kanetsu Co., LTD., 34599
+"Kanetsu Co., LTD.", 34599
 Fuji TV, 34601
 Pony Canyon, 34613
 DAX Production, 34615
@@ -13797,7 +13797,7 @@ Dentsu, 35067
 Rakuonsha, 35067
 AT-X, 35067
 Avex Pictures, 35067
-Daiichi Shokai CO., LTD, 35067
+"Daiichi Shokai CO., LTD", 35067
 TV Tokyo, 35069
 AT-X, 35073
 Enterbrain, 35073

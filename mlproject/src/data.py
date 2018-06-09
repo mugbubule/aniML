@@ -6,25 +6,62 @@ from matplotlib import pyplot
 
 class Data:
     # Load the csv file into pandas dataset
-    def voice_actor(self):
-        names = ["voice_actor_id", "voice_actor_name", "anime_id"]
-        voice_actor = pd.read_csv("../../jikanAPI/jikan/voice_actor.csv", quotechar='"', delimiter=',', quoting=csv.QUOTE_ALL,
+
+    def add_studio(self):
+        names = ["studio_name", "anime_id"]
+        studio = pd.read_csv("../../jikanAPI/jikan/studio.csv", quotechar='"', delimiter=',', quoting=csv.QUOTE_ALL,
                             skipinitialspace=True, parse_dates=True, header=None, names=names,
-                            dtype={'voice_actor_id': np.int32, 'voice_actor_name': object, "anime_id": np.int32})
-        voice_actor_val = voice_actor.groupby("voice_actor_name").size().to_frame('voice_actor_val');
-        working_table = pd.merge(voice_actor, voice_actor_val, left_on='voice_actor_name', right_on='voice_actor_name')
+                            dtype={'studio_name': object, "anime_id": np.int32})
+        studio_val = studio.groupby("studio_name").size().to_frame('studio_val');
+        working_table = pd.merge(studio, studio_val, left_on='studio_name', right_on='studio_name')
         working_table = self.dataset.merge(working_table, left_index=True, right_on='anime_id')
         working_table = working_table.groupby('anime_id').sum()
+        self.dataset = working_table
+        print(working_table)
+        #self.add_licensor()
 
-    def work_on_data(self): # ça à l'air bon mais omg faut vérifier
+    def add_staff(self):
+        names = ["staff_id", "staff_name", "staff_surname", "staff_position", "anime_id"]
+        staff = pd.read_csv("../../jikanAPI/jikan/staff.csv", quotechar='"', delimiter=',', quoting=csv.QUOTE_ALL,
+                            skipinitialspace=True, parse_dates=True, header=None, names=names,
+                            dtype={"staff_id": np.int32, 'staff_name': object, 'staff_surname': object, 'staff_position': object})
+        staff_val = staff.groupby("staff_name").size().to_frame('staff_val');
+        working_table = pd.merge(staff, staff_val, left_on='staff_name', right_on='staff_name')
+        working_table = self.dataset.merge(working_table, left_index=True, right_on='anime_id')
+        working_table = working_table.groupby('anime_id').sum()
+        self.dataset = working_table
+        print(working_table)
+        self.add_studio()
+
+    def add_voice_actor(self):
+        names = ["voice_actor_id", "voice_actor_name", "voice_actor_surname", "anime_id"]
+        voice_actor = pd.read_csv("../../jikanAPI/jikan/voice_actor.csv", quotechar='"', delimiter=',', quoting=csv.QUOTE_ALL,
+                            skipinitialspace=True, parse_dates=True, header=None, names=names,
+                            dtype={'voice_actor_name': object, 'voice_actor_surname': object})
+        voice_actor_val = voice_actor.groupby("voice_actor_name").size().to_frame('voice_actor_val');
+        print(voice_actor)
+        working_table = pd.merge(voice_actor, voice_actor_val, left_on='voice_actor_name', right_on='voice_actor_name')
+        print(working_table)
+        working_table = self.dataset.merge(working_table, left_index=True, right_on='anime_id')
+        print(working_table)
+        working_table = working_table.groupby('anime_id').sum()
+        self.dataset = working_table
+        print(working_table)
+        self.add_staff()
+
+    def add_producer(self): # ça à l'air bon mais omg faut vérifier
+        print(self.dataset)
         names = ["producer_name", "anime_id"]
         producer = pd.read_csv("../../jikanAPI/jikan/producer.csv", quotechar='"', delimiter=',', quoting=csv.QUOTE_ALL,
                             skipinitialspace=True, parse_dates=True, header=None, names=names,
-                            dtype={'producer_name': object})
+                            dtype={'producer_name': object, "anime_id": np.int32})
         producer_val = producer.groupby("producer_name").size().to_frame('producer_val');
         working_table = pd.merge(producer, producer_val, left_on='producer_name', right_on='producer_name')
         working_table = self.dataset.merge(working_table, left_index=True, right_on='anime_id')
         working_table = working_table.groupby('anime_id').sum()
+        print(working_table)
+        self.dataset = working_table
+        self.add_voice_actor()
 
     def __init__(self, filename):
         self.names = ["id", "title", "type", "source", "episodes", "aired", "duration", "rating", "score", "rank",
@@ -47,7 +84,7 @@ class Data:
         print(self.dataset.dtypes)
         print()
         self.compute_columns()
-        #self.work_on_data()
+        self.add_producer()
 
     def compute_columns(self):
         self.dataset['watching_percent'] = self.dataset['watching'] / self.dataset['total']
