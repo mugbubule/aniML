@@ -83,12 +83,12 @@ class Algorithm:
                                                                                             random_state=self.seed)
         # Spot-Check Algorithms
         if testing is True:
-            #self.spot_algo(dataset)
-            #self.standard_spot_algo(dataset)
-            self.tune_SVR(data)
+            self.spot_algo(dataset)
+            self.standard_spot_algo(dataset)
+            #self.tune_SVR(data)
             #self.tune_knn(data)
-            #self.ensemble_methods(dataset)
-            self.tune_gbm(dataset)
+            self.ensemble_methods(dataset)
+            #self.tune_gbm(dataset)
         else:
             self.finalize(data)
 

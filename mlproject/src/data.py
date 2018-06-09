@@ -47,7 +47,7 @@ class Data:
         print(self.dataset.dtypes)
         print()
         self.compute_columns()
-        self.work_on_data()
+        #self.work_on_data()
 
     def compute_columns(self):
         self.dataset['watching_percent'] = self.dataset['watching'] / self.dataset['total']
