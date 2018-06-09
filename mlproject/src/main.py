@@ -33,7 +33,6 @@ def main():
 #   a) Predictions on validation dataset
 #   b) Create standalone model on entire training dataset
 #   c) Save model for later use
-    algorithm.finalize(data.dataset)
 
 if __name__ == "__main__":
     main()
